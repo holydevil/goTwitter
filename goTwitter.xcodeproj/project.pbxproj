@@ -10,6 +10,10 @@
 		D47ED12E195E96E600585FCB /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED12D195E96E600585FCB /* TwitterClient.m */; };
 		D47ED132195E989600585FCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED130195E989600585FCB /* LoginViewController.m */; };
 		D47ED133195E989600585FCB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED131195E989600585FCB /* LoginViewController.xib */; };
+		D47ED138195F39E800585FCB /* HomeTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED136195F39E800585FCB /* HomeTimelineViewController.m */; };
+		D47ED139195F39E800585FCB /* HomeTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED137195F39E800585FCB /* HomeTimelineViewController.xib */; };
+		D47ED13D195F3CF500585FCB /* TweetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED13B195F3CF500585FCB /* TweetTableViewCell.m */; };
+		D47ED13E195F3CF500585FCB /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED13C195F3CF500585FCB /* TweetTableViewCell.xib */; };
 		D4D327EE195E95EF0008361E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327ED195E95EF0008361E /* Foundation.framework */; };
 		D4D327F0195E95EF0008361E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327EF195E95EF0008361E /* CoreGraphics.framework */; };
 		D4D327F2195E95EF0008361E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327F1195E95EF0008361E /* UIKit.framework */; };
@@ -43,6 +47,12 @@
 		D47ED12F195E989600585FCB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D47ED130195E989600585FCB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D47ED131195E989600585FCB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		D47ED135195F39E800585FCB /* HomeTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTimelineViewController.h; sourceTree = "<group>"; };
+		D47ED136195F39E800585FCB /* HomeTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTimelineViewController.m; sourceTree = "<group>"; };
+		D47ED137195F39E800585FCB /* HomeTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTimelineViewController.xib; sourceTree = "<group>"; };
+		D47ED13A195F3CF500585FCB /* TweetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetTableViewCell.h; sourceTree = "<group>"; };
+		D47ED13B195F3CF500585FCB /* TweetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetTableViewCell.m; sourceTree = "<group>"; };
+		D47ED13C195F3CF500585FCB /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
 		D4D327EA195E95EF0008361E /* goTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D327ED195E95EF0008361E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4D327EF195E95EF0008361E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,6 +96,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D47ED134195F392700585FCB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D47ED12F195E989600585FCB /* LoginViewController.h */,
+				D47ED130195E989600585FCB /* LoginViewController.m */,
+				D47ED131195E989600585FCB /* LoginViewController.xib */,
+				D47ED135195F39E800585FCB /* HomeTimelineViewController.h */,
+				D47ED136195F39E800585FCB /* HomeTimelineViewController.m */,
+				D47ED137195F39E800585FCB /* HomeTimelineViewController.xib */,
+				D47ED13A195F3CF500585FCB /* TweetTableViewCell.h */,
+				D47ED13B195F3CF500585FCB /* TweetTableViewCell.m */,
+				D47ED13C195F3CF500585FCB /* TweetTableViewCell.xib */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		D4D327E1195E95EE0008361E = {
 			isa = PBXGroup;
 			children = (
@@ -123,13 +149,11 @@
 		D4D327F3195E95EF0008361E /* goTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				D47ED134195F392700585FCB /* ViewControllers */,
 				D4D327FC195E95EF0008361E /* AppDelegate.h */,
 				D4D327FD195E95EF0008361E /* AppDelegate.m */,
 				D4D327FF195E95EF0008361E /* Images.xcassets */,
 				D4D327F4195E95EF0008361E /* Supporting Files */,
-				D47ED12F195E989600585FCB /* LoginViewController.h */,
-				D47ED130195E989600585FCB /* LoginViewController.m */,
-				D47ED131195E989600585FCB /* LoginViewController.xib */,
 			);
 			path = goTwitter;
 			sourceTree = "<group>";
@@ -240,8 +264,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47ED13E195F3CF500585FCB /* TweetTableViewCell.xib in Resources */,
 				D4D327F8195E95EF0008361E /* InfoPlist.strings in Resources */,
 				D4D32800195E95EF0008361E /* Images.xcassets in Resources */,
+				D47ED139195F39E800585FCB /* HomeTimelineViewController.xib in Resources */,
 				D47ED133195E989600585FCB /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,8 +322,10 @@
 			files = (
 				D47ED132195E989600585FCB /* LoginViewController.m in Sources */,
 				D4D327FE195E95EF0008361E /* AppDelegate.m in Sources */,
+				D47ED138195F39E800585FCB /* HomeTimelineViewController.m in Sources */,
 				D47ED12E195E96E600585FCB /* TwitterClient.m in Sources */,
 				D4D327FA195E95EF0008361E /* main.m in Sources */,
+				D47ED13D195F3CF500585FCB /* TweetTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

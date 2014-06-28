@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "HomeTimelineViewController.h"
 
 @implementation NSURL (dictionaryFromQueryString)
 -(NSDictionary *) dictionaryFromQueryString{
@@ -34,8 +35,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    LoginViewController *loginViewController = [[LoginViewController alloc]init];
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+//    LoginViewController *loginViewController = [[LoginViewController alloc]init];
+//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+    HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+    
     // Override point for customization after application launch.
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -84,7 +88,6 @@
                     [client.requestSerializer saveAccessToken:accessToken];
                     
                     //got the access token. Play with it.
-                    
                     [client getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"timeline is %@", responseObject);
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
