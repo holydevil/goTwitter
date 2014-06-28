@@ -8,6 +8,8 @@
 
 #import "HomeTimelineViewController.h"
 #import "TweetTableViewCell.h"
+#import "TweetSheetViewController.h"
+
 
 @interface HomeTimelineViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTimelineTableView;
@@ -40,7 +42,7 @@
     self.title = @"Home";
     
     //set-up top right button
-    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleDone target:self action:@selector(onTweetButton)];
+    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onTweetButton)];
     self.navigationItem.rightBarButtonItem = tweetButton;
     
     [self.homeTimelineTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"tweetCell"];
@@ -50,6 +52,8 @@
 
 -(void)onTweetButton {
     NSLog(@"tweet button clicked");
+    TweetSheetViewController *tweetSheetViewController = [[TweetSheetViewController alloc]init];
+    [self.navigationController pushViewController:tweetSheetViewController animated:YES];
 }
 
 #pragma mark - Table methods
