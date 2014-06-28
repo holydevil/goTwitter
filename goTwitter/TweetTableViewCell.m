@@ -8,6 +8,10 @@
 
 #import "TweetTableViewCell.h"
 
+@interface TweetTableViewCell()
+
+@end
+
 @implementation TweetTableViewCell
 
 - (void)awakeFromNib
