@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TweetTableViewCell : UITableViewCell
+@property (nonatomic, strong) NSDictionary *tweet;
 
 @end

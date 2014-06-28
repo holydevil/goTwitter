@@ -36,10 +36,20 @@
 -(void)setupDefaults {
     self.homeTimelineTableView.dataSource = self;
     self.homeTimelineTableView.delegate = self;
+    self.homeTimelineTableView.rowHeight = 92;
+    self.title = @"Home";
+    
+    //set-up top right button
+    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStyleDone target:self action:@selector(onTweetButton)];
+    self.navigationItem.rightBarButtonItem = tweetButton;
     
     [self.homeTimelineTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"tweetCell"];
 
     
+}
+
+-(void)onTweetButton {
+    NSLog(@"tweet button clicked");
 }
 
 #pragma mark - Table methods
@@ -49,7 +59,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tweetCell" forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"index path row is %ld", (long)indexPath.row];
+//    cell.textLabel.text = [NSString stringWithFormat:@"index path row is %ld", (long)indexPath.row];
+    
+    NSDictionary *dummyTweet = @{@"user":@"Praveen"};
+    cell.tweet = dummyTweet;
     
     return cell;
 }
