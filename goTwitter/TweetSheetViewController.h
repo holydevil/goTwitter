@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TweetSheetViewController : UIViewController
+@interface TweetSheetViewController : UIViewController<UITextViewDelegate>
 
 @end

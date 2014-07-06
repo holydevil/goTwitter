@@ -12,8 +12,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *handleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UITextField *tweetTextField;
 @property (weak, nonatomic) IBOutlet UILabel *tweetCountLabel;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+@property (strong, nonatomic) UIBarButtonItem *tweetButton;
 
 @end
 
@@ -43,29 +44,40 @@
     
     //set-up top left cancel button and tweet button
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButton)];
-    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(tweetButton)];
+    self.tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(tweetButtonTapped)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    self.navigationItem.rightBarButtonItem = tweetButton;
+    self.navigationItem.rightBarButtonItem = self.tweetButton;
     
     //set focus on textfiled
-    [self.tweetTextField becomeFirstResponder];
-    //hide border
-    [self.tweetTextField setBorderStyle:UITextBorderStyleNone];
+//    [self.tweetTextField becomeFirstResponder];
+    [self.tweetTextView becomeFirstResponder];
+    
+    //set delegate property to self
+    self.tweetTextView.delegate = self;
 }
 
 -(void)cancelButton {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
--(void)tweetButton {
+-(void)tweetButtonTapped {
     NSLog(@"clicked the tweet button");
 }
 
-- (IBAction)tweetChanged:(id)sender {
-    int tweetCount = [self.tweetTextField.text length];
+// hide the keyboard when you touch anywhere else
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+// Decide what to do when number of chars change in a tweet
+-(void)textViewDidChange:(UITextView *)textView {
+    int tweetCount = [self.tweetTextView.text length];
     //set colours for tweet counter based on characters left
     if (tweetCount >= 0) {
         self.tweetCountLabel.textColor = [UIColor blackColor];
+        //enable the tweet button
+        self.tweetButton.enabled = YES;
     }
     
     if (tweetCount > 120 && tweetCount <= 139) {
@@ -80,12 +92,15 @@
     
     if (tweetCount > 140) {
         tweetCount = 140-tweetCount;
+        //disable the tweet button on top right
+        self.tweetButton.enabled = NO;
     }
     
     self.tweetCountLabel.text = [NSString stringWithFormat:@"%d",tweetCount];
     
     NSLog(@"%d", tweetCount);
 }
+
 
 - (void)didReceiveMemoryWarning
 {
