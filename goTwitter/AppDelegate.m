@@ -35,10 +35,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    LoginViewController *loginViewController = [[LoginViewController alloc]init];
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
-//    HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
-//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+    // Check if user is logged in and open up view controllers accrodingly
+//    if ([[TwitterClient instance] isAuthorized]) {
+//        HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+//        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+//        NSLog(@"user is authorized");
+//    } else {
+        LoginViewController *loginViewController = [[LoginViewController alloc]init];
+        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+//        NSLog(@"user NOT authorized");
+//    }
+    
     
     // Override point for customization after application launch.
     
@@ -74,34 +81,34 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([url.scheme isEqualToString:@"gotwitter"]) {
         if ([url.host isEqualToString:@"oauth"]) {
             NSDictionary *parameters = [url dictionaryFromQueryString];
             if (parameters[@"oauth_token"] && parameters[@"oauth_verifier"]) {
                 TwitterClient *client = [TwitterClient instance];
-                [client fetchAccessTokenWithPath:@"/oauth/access_token" method:@"POST" requestToken:[BDBOAuthToken tokenWithQueryString:url.query] success:^(BDBOAuthToken *accessToken) {
-                    NSLog(@"Access token %@", accessToken);
-                    [client.requestSerializer saveAccessToken:accessToken];
-                    
-                    //got the access token. Play with it.
-                    [client getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                        NSLog(@"timeline is %@", responseObject);
-                        NSLog(@"User authenticated");
-                        
-                        // pass the responseObject to home timeline and load homeTimeline view
-                        HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
-                        homeTimelineViewController.timeline = responseObject;
-                        
-                        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
-                        
-                        
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"some error occured %@", error);
-                    }];
+                [client fetchAccessTokenWithPath:@"/oauth/access_token"
+                                          method:@"POST"
+                                    requestToken:[BDBOAuthToken tokenWithQueryString:url.query]
+                                         success:^(BDBOAuthToken *accessToken) {
+                                             NSLog(@"Access token %@", accessToken);
+                                             [client.requestSerializer saveAccessToken:accessToken];
+                                             
+                                             //got the access token. Play with it.
+                                             [client getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                 //                        NSLog(@"timeline is %@", responseObject);
+                                                 NSLog(@"User authenticated");
+                                                 
+                                                 // pass the responseObject to home timeline and load homeTimeline view
+                                                 HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+                                                 homeTimelineViewController.timeline = responseObject;
+                                                 
+                                                 self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+                                                 
+                                                 
+                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                 NSLog(@"some error occured %@", error);
+                                             }];
                     
                 } failure:^(NSError *error) {
                     NSLog(@"Access token error");

@@ -9,11 +9,17 @@
 #import "HomeTimelineViewController.h"
 #import "TweetTableViewCell.h"
 #import "TweetSheetViewController.h"
+#import "TwitterClient.h"
+#import "MBProgressHUD.h"
+#import "TweetDetailsViewController.h"
 
 
 @interface HomeTimelineViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTimelineTableView;
 @property (nonatomic, strong) NSMutableArray *localTimeline;
+
+@property UIRefreshControl *refreshControl;
+@property MBProgressHUD *hud;
 @end
 
 @implementation HomeTimelineViewController
@@ -23,6 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+//        [self loadTimeline];
     }
     return self;
 }
@@ -31,12 +38,42 @@
 {
     [super viewDidLoad];
     [self setupDefaults];
-    // Do any additional setup after loading the view from its nib.
+    [self pullToRefresh];
 }
 
-#pragma mark - Pick up data passed from previous view
+// Temp splution to load timeline after posting a tweet
+// This always runs when view controller is popped
+-(void)viewWillAppear:(BOOL)animated {
+    [self loadTimeline];
+}
+
+#pragma mark - Pull to Refresh
+- (void) pullToRefresh {
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.refreshControl addTarget:self action:@selector(loadTimeline) forControlEvents:UIControlEventValueChanged];
+    [self.homeTimelineTableView addSubview:self.refreshControl];
+}
+
+#pragma mark - Load twitter timeline
+-(void)loadTimeline {
+    [self showHUD];
+    //If user is logged-in, load timeline
+    if ([[TwitterClient instance] isAuthorized]) {
+        [[TwitterClient instance] getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self setTimeline:responseObject];
+            NSLog(@"in Loadtimeline in HomeTimelineViewController");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Something got messed up in HomeTimelineViewController! Handle this later. %@", error);
+        }];
+    }
+    [self hideHUD];
+    
+}
+
+#pragma mark - Process tweet data and reload table view
 -(void)setTimeline:(NSDictionary *)timeline {
     self.localTimeline = [[NSMutableArray alloc]init];
+    [self.localTimeline removeAllObjects];
 
     //loop through the array of Dictionaries and pick just what we need
     for (NSDictionary *tweet in timeline) {
@@ -64,6 +101,8 @@
 //    NSLog(@"setting local variable for timeline");
     NSLog(@"local timeline is ... %@", self.localTimeline);
     NSLog(@"number of elements in local timeline is ... %d", [self.localTimeline count]);
+    
+    [self.homeTimelineTableView reloadData];
 }
 
 #pragma mark - Defaults
@@ -77,13 +116,13 @@
     UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onTweetButton)];
     self.navigationItem.rightBarButtonItem = tweetButton;
     
-    [self.homeTimelineTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"tweetCell"];
+    [self.homeTimelineTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"TweetTableViewCell"];
 
     
 }
 
 -(void)onTweetButton {
-    NSLog(@"tweet button clicked");
+    NSLog(@"'New' button clicked");
     TweetSheetViewController *tweetSheetViewController = [[TweetSheetViewController alloc]init];
     [self.navigationController pushViewController:tweetSheetViewController animated:YES];
 }
@@ -94,14 +133,16 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tweetCell" forIndexPath:indexPath];
-//    cell.textLabel.text = [NSString stringWithFormat:@"index path row is %ld", (long)indexPath.row];
-//    NSLog(@"value at row %d is %@", indexPath.row,self.localTimeline[indexPath.row]);
-    
-//    NSDictionary *dummyTweet = @{@"user":@"Praveen"};
+    TweetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell" forIndexPath:indexPath];
     cell.tweet = self.localTimeline[indexPath.row];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetDetailsViewController *tweetDetailsViewController = [[TweetDetailsViewController alloc]init];
+    tweetDetailsViewController.tweet = self.localTimeline[indexPath.row];
+    [self.navigationController pushViewController:tweetDetailsViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,5 +150,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Loading icons
+- (void) showHUD {
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.labelText = @"loading";
+    [self.hud show:YES];
+}
+
+- (void) hideHUD {
+    [self.hud hide:YES];
+    
+    //stop the pull to refresh loading indicator
+    [self.refreshControl endRefreshing];
+}
+
 
 @end

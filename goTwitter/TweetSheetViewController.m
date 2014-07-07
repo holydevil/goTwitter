@@ -7,6 +7,7 @@
 //
 
 #import "TweetSheetViewController.h"
+#import "TwitterClient.h"
 
 @interface TweetSheetViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -62,7 +63,13 @@
 -(void)tweetButtonTapped {
     NSLog(@"clicked the tweet button");
     // send tweet, wait for ack, and then pop to timeline
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[TwitterClient instance] postTweet:self.tweetTextView.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"tweet posted");
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"tweeting failed %@", error);
+    }];
+
 }
 
 // hide the keyboard when you touch anywhere else

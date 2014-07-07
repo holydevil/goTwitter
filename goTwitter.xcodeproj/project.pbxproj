@@ -16,6 +16,8 @@
 		D47ED13E195F3CF500585FCB /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED13C195F3CF500585FCB /* TweetTableViewCell.xib */; };
 		D47ED142195F6C9600585FCB /* TweetSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED140195F6C9600585FCB /* TweetSheetViewController.m */; };
 		D47ED143195F6C9600585FCB /* TweetSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED141195F6C9600585FCB /* TweetSheetViewController.xib */; };
+		D47ED147196A896A00585FCB /* TweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47ED145196A896A00585FCB /* TweetDetailsViewController.m */; };
+		D47ED148196A896A00585FCB /* TweetDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47ED146196A896A00585FCB /* TweetDetailsViewController.xib */; };
 		D4D327EE195E95EF0008361E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327ED195E95EF0008361E /* Foundation.framework */; };
 		D4D327F0195E95EF0008361E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327EF195E95EF0008361E /* CoreGraphics.framework */; };
 		D4D327F2195E95EF0008361E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D327F1195E95EF0008361E /* UIKit.framework */; };
@@ -58,6 +60,9 @@
 		D47ED13F195F6C9600585FCB /* TweetSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSheetViewController.h; sourceTree = "<group>"; };
 		D47ED140195F6C9600585FCB /* TweetSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSheetViewController.m; sourceTree = "<group>"; };
 		D47ED141195F6C9600585FCB /* TweetSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetSheetViewController.xib; sourceTree = "<group>"; };
+		D47ED144196A896A00585FCB /* TweetDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetDetailsViewController.h; sourceTree = "<group>"; };
+		D47ED145196A896A00585FCB /* TweetDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetDetailsViewController.m; sourceTree = "<group>"; };
+		D47ED146196A896A00585FCB /* TweetDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetDetailsViewController.xib; sourceTree = "<group>"; };
 		D4D327EA195E95EF0008361E /* goTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D327ED195E95EF0008361E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4D327EF195E95EF0008361E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,6 +121,9 @@
 				D47ED13F195F6C9600585FCB /* TweetSheetViewController.h */,
 				D47ED140195F6C9600585FCB /* TweetSheetViewController.m */,
 				D47ED141195F6C9600585FCB /* TweetSheetViewController.xib */,
+				D47ED144196A896A00585FCB /* TweetDetailsViewController.h */,
+				D47ED145196A896A00585FCB /* TweetDetailsViewController.m */,
+				D47ED146196A896A00585FCB /* TweetDetailsViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -277,6 +285,7 @@
 				D47ED143195F6C9600585FCB /* TweetSheetViewController.xib in Resources */,
 				D4D32800195E95EF0008361E /* Images.xcassets in Resources */,
 				D47ED139195F39E800585FCB /* HomeTimelineViewController.xib in Resources */,
+				D47ED148196A896A00585FCB /* TweetDetailsViewController.xib in Resources */,
 				D47ED133195E989600585FCB /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +343,7 @@
 				D4D327FE195E95EF0008361E /* AppDelegate.m in Sources */,
 				D47ED138195F39E800585FCB /* HomeTimelineViewController.m in Sources */,
 				D47ED12E195E96E600585FCB /* TwitterClient.m in Sources */,
+				D47ED147196A896A00585FCB /* TweetDetailsViewController.m in Sources */,
 				D4D327FA195E95EF0008361E /* main.m in Sources */,
 				D47ED13D195F3CF500585FCB /* TweetTableViewCell.m in Sources */,
 			);

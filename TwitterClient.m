@@ -15,7 +15,9 @@
     static dispatch_once_t once;
     
     dispatch_once(&once, ^{
-        instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com"] consumerKey:@"7xNcIPMJ0sHNJrvoYFYG6Q5MI" consumerSecret:@"yscPMvZEbrnxT1MFWQfN9P9yGDtajFQxTJN11kWBpX9xWQPkAq"];
+        instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com"]
+                                              consumerKey:@"GEHXc99E5iTj4Om0uQjBmbPhO"
+                                           consumerSecret:@"09DvRXtUwjdy5WKkliXhjKf6DjEtEUtLaB2Fe0bV6tj5toh9cA"];
     });
     
     return instance;
@@ -23,18 +25,33 @@
 
 -(void)login {
     [self.requestSerializer removeAccessToken];
-    [self fetchRequestTokenWithPath:@"oauth/request_token" method:@"POST" callbackURL:[NSURL URLWithString:@"gotwitter://oauth"] scope:nil success:^(BDBOAuthToken *requestToken) {
-        NSLog(@"Got the request token");
-        NSString *authURL = [NSString stringWithFormat:@"https://api.twitter.com/oauth/authorize?oauth_token=%@", requestToken.token];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:authURL]];
-    } failure:^(NSError *error) {
-        NSLog(@"failure");
-    }];
+    [self fetchRequestTokenWithPath:@"oauth/request_token"
+                             method:@"POST"
+                        callbackURL:[NSURL URLWithString:@"gotwitter://oauth"]
+                              scope:nil
+                            success:^(BDBOAuthToken *requestToken) {
+                                NSLog(@"Got the request token");
+                                NSString *authURL = [NSString stringWithFormat:@"https://api.twitter.com/oauth/authorize?oauth_token=%@", requestToken.token];
+                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:authURL]];
+                            } failure:^(NSError *error) {
+                                NSLog(@"failure");
+                            }];
 }
+
 
 -(AFHTTPRequestOperation *) getHomeTimelineWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     return [self GET:@"1.1/statuses/home_timeline.json" parameters:nil success:success failure:failure];
+}
+
+-(AFHTTPRequestOperation *)postTweet:(NSString *) tweet
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    
+    NSString *tweetUrl = @"1.1/statuses/update.json";
+    NSDictionary *tweetData = @{@"status":tweet};
+    
+    return [self POST:tweetUrl parameters:tweetData success:success failure:failure];
 }
 
 @end
