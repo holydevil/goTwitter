@@ -76,12 +76,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="3KL-We-vIr" firstAttribute="leading" secondItem="ZX4-pZ-iOV" secondAttribute="trailing" constant="8" id="2d6-lf-s7j"/>
+                    <constraint firstItem="ZX4-pZ-iOV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="5ba-TU-U5v"/>
                     <constraint firstItem="jiY-pm-6G9" firstAttribute="leading" secondItem="5JY-mb-eYq" secondAttribute="trailing" constant="10" id="AQ4-YF-7Yh"/>
                     <constraint firstAttribute="trailing" secondItem="3KL-We-vIr" secondAttribute="trailing" constant="20" id="BpE-41-bqp"/>
                     <constraint firstItem="ZX4-pZ-iOV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="Gsr-yA-Plh"/>
                     <constraint firstItem="glj-jI-WJF" firstAttribute="leading" secondItem="ZX4-pZ-iOV" secondAttribute="trailing" constant="8" id="aa0-2u-NcM"/>
                     <constraint firstItem="3KL-We-vIr" firstAttribute="top" secondItem="5JY-mb-eYq" secondAttribute="bottom" constant="1" id="ces-ba-hCI"/>
                     <constraint firstItem="5JY-mb-eYq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="jUb-2p-qf3"/>
+                    <constraint firstItem="ZX4-pZ-iOV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="lrJ-7y-N22"/>
                     <constraint firstItem="glj-jI-WJF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="qqi-rC-9dV"/>
                     <constraint firstItem="jiY-pm-6G9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="shg-og-l7O"/>
                     <constraint firstAttribute="trailing" secondItem="jiY-pm-6G9" secondAttribute="trailing" id="u72-Qz-3ST"/>
