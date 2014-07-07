@@ -84,7 +84,7 @@
         tempDictionary[@"id"] = tweet[@"id"];
         tempDictionary[@"userName"] = [tweet valueForKeyPath:@"user.name"];
         tempDictionary[@"userHandle"] = [tweet valueForKeyPath:@"user.screen_name"];
-        tempDictionary[@"createdAt"] = [tweet valueForKeyPath:@"user.created_at"];
+        tempDictionary[@"createdAt"] = tweet[@"created_at"];
         tempDictionary[@"profileImageUrl"] = [tweet valueForKeyPath:@"user.profile_image_url"];
         tempDictionary[@"text"] = tweet[@"text"];
         tempDictionary[@"retweetCount"] = tweet[@"retweet_count"];
@@ -163,6 +163,5 @@
     //stop the pull to refresh loading indicator
     [self.refreshControl endRefreshing];
 }
-
 
 @end
