@@ -96,7 +96,7 @@
                                              
                                              //got the access token. Play with it.
                                              [client getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                 //                        NSLog(@"timeline is %@", responseObject);
+                                                 // NSLog(@"timeline is %@", responseObject);
                                                  NSLog(@"User authenticated");
                                                  
                                                  // pass the responseObject to home timeline and load homeTimeline view

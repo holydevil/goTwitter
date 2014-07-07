@@ -112,9 +112,17 @@
     self.navigationItem.rightBarButtonItem = tweetButton;
     
     [self.homeTimelineTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"TweetTableViewCell"];
-
     
+    //Style navigation bar and nagivation bar text
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.33 green:0.67 blue:0.93 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.98 green:1 blue:1 alpha:1];
+
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:0.98 green:1 blue:1 alpha:1],NSForegroundColorAttributeName,nil]];
 }
+
+
 
 -(void)onTweetButton {
     NSLog(@"'New' button clicked");

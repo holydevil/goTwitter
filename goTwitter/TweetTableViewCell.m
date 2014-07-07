@@ -42,12 +42,11 @@
     self.handleLabel.text = [NSString stringWithFormat:@"@%@",tweet[@"userHandle"]];
     [self.profileImageView setImageWithURL:[NSURL URLWithString:tweet[@"profileImageUrl"]]];
     self.durationLabel.text = [self getRelativeDateFor:tweet[@"createdAt"]];
-//    self.tweetLabel set
 }
 
 #pragma mark - Defaults (move them to a different file)
 -(NSString *)getRelativeDateFor: (NSString *) date {
-    NSLog(@"input date is %@", date);
+//    NSLog(@"input date is %@", date);
     //convert string to date object
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss Z yyyy"];
