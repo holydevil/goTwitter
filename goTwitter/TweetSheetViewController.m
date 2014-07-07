@@ -48,8 +48,7 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = self.tweetButton;
     
-    //set focus on textfiled
-//    [self.tweetTextField becomeFirstResponder];
+    //set focus on textfield
     [self.tweetTextView becomeFirstResponder];
     
     //set delegate property to self
@@ -62,6 +61,8 @@
 
 -(void)tweetButtonTapped {
     NSLog(@"clicked the tweet button");
+    // send tweet, wait for ack, and then pop to timeline
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // hide the keyboard when you touch anywhere else

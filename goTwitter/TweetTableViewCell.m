@@ -7,6 +7,7 @@
 //
 
 #import "TweetTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface TweetTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
@@ -35,7 +36,10 @@
 }
 
 -(void)setTweet:(NSDictionary *)tweet {
-    self.tweetLabel.text = @"the quick brown fox jumped over the lazy dog.the quick brown fox jumped over the lazy dog.the quick brown fox jumped over the lazy dog 1233.";
+    self.tweetLabel.text = tweet[@"text"];
+    self.userNameLabel.text = tweet[@"userName"];
+    self.handleLabel.text = [NSString stringWithFormat:@"@%@",tweet[@"userHandle"]];
+    [self.profileImageView setImageWithURL:[NSURL URLWithString:tweet[@"profileImageUrl"]]];
 //    self.tweetLabel set
 }
 @end

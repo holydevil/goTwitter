@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeTimelineViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) NSDictionary *timeline;
 
 @end

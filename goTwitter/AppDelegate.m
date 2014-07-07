@@ -35,10 +35,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    LoginViewController *loginViewController = [[LoginViewController alloc]init];
-//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
-    HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+    LoginViewController *loginViewController = [[LoginViewController alloc]init];
+    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+//    HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+//    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
     
     // Override point for customization after application launch.
     
@@ -89,7 +89,16 @@
                     
                     //got the access token. Play with it.
                     [client getHomeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"timeline is %@", responseObject);
+//                        NSLog(@"timeline is %@", responseObject);
+                        NSLog(@"User authenticated");
+                        
+                        // pass the responseObject to home timeline and load homeTimeline view
+                        HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+                        homeTimelineViewController.timeline = responseObject;
+                        
+                        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+                        
+                        
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"some error occured %@", error);
                     }];
