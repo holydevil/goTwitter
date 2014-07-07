@@ -36,15 +36,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Check if user is logged in and open up view controllers accrodingly
-//    if ([[TwitterClient instance] isAuthorized]) {
-//        HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
-//        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
-//        NSLog(@"user is authorized");
-//    } else {
+    if ([[TwitterClient instance] isAuthorized]) {
+        HomeTimelineViewController *homeTimelineViewController = [[HomeTimelineViewController alloc]init];
+        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:homeTimelineViewController];
+        NSLog(@"user is authorized");
+    } else {
         LoginViewController *loginViewController = [[LoginViewController alloc]init];
         self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
-//        NSLog(@"user NOT authorized");
-//    }
+        NSLog(@"user NOT authorized");
+    }
     
     
     // Override point for customization after application launch.

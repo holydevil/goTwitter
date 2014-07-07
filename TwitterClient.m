@@ -16,8 +16,8 @@
     
     dispatch_once(&once, ^{
         instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com"]
-                                              consumerKey:@"GEHXc99E5iTj4Om0uQjBmbPhO"
-                                           consumerSecret:@"09DvRXtUwjdy5WKkliXhjKf6DjEtEUtLaB2Fe0bV6tj5toh9cA"];
+                                              consumerKey:@"7xNcIPMJ0sHNJrvoYFYG6Q5MI"
+                                           consumerSecret:@"yscPMvZEbrnxT1MFWQfN9P9yGDtajFQxTJN11kWBpX9xWQPkAq"];
     });
     
     return instance;

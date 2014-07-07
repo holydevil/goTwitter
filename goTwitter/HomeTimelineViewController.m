@@ -92,13 +92,8 @@
         
         //push this flat dictionary to localTimeline array
         [self.localTimeline addObject:tempDictionary];
-        
-//        NSLog(@"temp dictionary = %@", tempDictionary);
-//        NSLog(@"local timeline = %@", self.localTimeline);
     }
 
-//    self.localTimeline = timeline;
-//    NSLog(@"setting local variable for timeline");
     NSLog(@"local timeline is ... %@", self.localTimeline);
     NSLog(@"number of elements in local timeline is ... %d", [self.localTimeline count]);
     
@@ -140,6 +135,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     TweetDetailsViewController *tweetDetailsViewController = [[TweetDetailsViewController alloc]init];
     tweetDetailsViewController.tweet = self.localTimeline[indexPath.row];
     [self.navigationController pushViewController:tweetDetailsViewController animated:YES];
