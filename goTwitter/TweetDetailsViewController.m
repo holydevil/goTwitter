@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *handleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *favImageView;
+
 
 @end
 
@@ -42,6 +46,11 @@
     self.handleLabel.text = [NSString stringWithFormat:@"@%@",tweet[@"userHandle"]];
     self.tweetLabel.text = tweet[@"text"];
     [self.profileImageView setImageWithURL:[NSURL URLWithString:tweet[@"profileImageUrl"]]];
+    
+    //defaults
+    self.replyImageView.image = [UIImage imageNamed:@"reply.png"];
+    self.retweetImageView.image = [UIImage imageNamed:@"retweet.png"];
+    self.favImageView.image = [UIImage imageNamed:@"favorite.png"];
     //    self.tweetLabel set
 }
 
