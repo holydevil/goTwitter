@@ -106,7 +106,7 @@
     
     self.tweetCountLabel.text = [NSString stringWithFormat:@"%d",tweetCount];
     
-    NSLog(@"%d", tweetCount);
+//    NSLog(@"%d", tweetCount);
 }
 
 

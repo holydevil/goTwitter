@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *homeTimelineTableView;
 @property (nonatomic, strong) NSMutableArray *localTimeline;
 
+@property (strong, nonatomic) TweetTableViewCell *prototypeCell;
+
 @property UIRefreshControl *refreshControl;
 @property MBProgressHUD *hud;
 @end
@@ -94,8 +96,8 @@
         [self.localTimeline addObject:tempDictionary];
     }
 
-    NSLog(@"local timeline is ... %@", self.localTimeline);
-    NSLog(@"number of elements in local timeline is ... %d", [self.localTimeline count]);
+//    NSLog(@"local timeline is ... %@", self.localTimeline);
+//    NSLog(@"number of elements in local timeline is ... %d", [self.localTimeline count]);
     
     [self.homeTimelineTableView reloadData];
 }
@@ -104,7 +106,7 @@
 -(void)setupDefaults {
     self.homeTimelineTableView.dataSource = self;
     self.homeTimelineTableView.delegate = self;
-    self.homeTimelineTableView.rowHeight = 92;
+//    self.homeTimelineTableView.rowHeight = 92;
     self.title = @"Home";
     
     //set-up top right button
@@ -150,6 +152,46 @@
     tweetDetailsViewController.tweet = self.localTimeline[indexPath.row];
     [self.navigationController pushViewController:tweetDetailsViewController animated:YES];
 }
+
+#pragma mark - Variable height for tweet cells
+- (TweetTableViewCell *)prototypeCell {
+    if (!_prototypeCell) {
+        _prototypeCell = [self.homeTimelineTableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell"];
+    }
+    return _prototypeCell;
+}
+
+- (void) configureCell:(TweetTableViewCell*)prototypeCell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Configure the dummy cell to calculate height.
+    prototypeCell.tweet = self.localTimeline[indexPath.row];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+    
+    // Fix the issue in width calculation on orientation change.
+    // Combined with prototypeCell:layoutSubviews, this fixes
+    // the issue where text height is wrong for multi-line text
+    // (Especially when 3 lines of text, it introduces padding on
+    // upper and lower edges).
+    self.prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.homeTimelineTableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
+    
+    [self.prototypeCell layoutIfNeeded];
+    
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    
+    // Add 1dpx height for the line.
+    // Magically, this seems to fix the text layout issue described
+    // above.
+//    NSLog(@"height is %f", (size.height+1));
+//    return 100;
+    return size.height+1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
