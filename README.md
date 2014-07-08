@@ -28,4 +28,4 @@ Time spent on this exercise = 18 hours.
 * BDBOAuth1Manager
 * SDWebImage
 * MBProgressHUD
-* DateTool (imported files)
+* DateTools (imported files)
